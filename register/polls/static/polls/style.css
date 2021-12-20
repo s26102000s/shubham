@@ -1,0 +1,8 @@
+li a {
+    color: green;
+}
+
+body {
+    background: rgb(238, 182, 182) url("images/image-gallery.jpg") no-repeat;
+    background-size: 100% 100%;
+}
