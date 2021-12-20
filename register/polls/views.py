@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 from .models import Choice, Question
-
+from datetime import datetime
 
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
@@ -51,3 +51,16 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+
+def AddQuestion(request):
+    date=datetime.now()
+    context={'form':Question(),'choice':Choice()}
+    if request.method== 'POST':
+        q=Question(question_text=request.POST['question'],pub_date=date)
+        q.save()
+        q=Question.objects.get(question_text=request.POST['question'],pub_date=date)
+        for a in request.POST['choices'].split(','):
+            c=Choice(question=q,choice_text=a)
+            c.save()
+        return HttpResponseRedirect(reverse('polls:index',))
+    return render(request, 'polls/Question.html', context)

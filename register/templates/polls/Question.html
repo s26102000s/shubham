@@ -1,0 +1,7 @@
+<form method="POST" action="">
+    {% csrf_token %}
+    <input id="question" type="text" name="question">
+    <input id="choices" type="text" name="choices" placeholder="Please write all the choices sprated with ','.">
+
+    <input id="submit" type="submit" name="submit" value='Submit'>
+</form>
